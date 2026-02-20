@@ -1,0 +1,36 @@
+{
+  "name": "wordle",
+  "version": "1.0.0",
+  "description": "Wordle desktop game",
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "electron:dev": "concurrently \"vite\" \"wait-on http://localhost:5173 && electron .\"",
+    "electron:build:win": "vite build && electron-builder --win",
+    "dist:zip": "powershell -Command \"Compress-Archive -Path 'release/win-unpacked' -DestinationPath 'release/Wordle-Windows.zip' -Force\""
+  },
+  "build": {
+    "appId": "com.wordle.desktop",
+    "productName": "Wordle",
+    "directories": { "output": "release" },
+    "files": ["dist/**/*", "electron/**/*"],
+    "win": {
+      "target": "dir",
+      "signAndEditExecutable": false
+    }
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "wordles": "^1.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "concurrently": "^8.2.2",
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.1",
+    "vite": "^5.0.0",
+    "wait-on": "^7.2.0"
+  }
+}
